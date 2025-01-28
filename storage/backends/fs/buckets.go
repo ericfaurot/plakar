@@ -26,11 +26,9 @@ import (
 	"github.com/PlakarKorp/plakar/objects"
 )
 
-
 type Buckets struct {
 	path string
 }
-
 
 func NewBuckets(path string) Buckets {
 	return Buckets{
@@ -92,13 +90,11 @@ func (buckets *Buckets) List() ([]objects.Checksum, error) {
 	return ret, nil
 }
 
-
 func (buckets *Buckets) Path(checksum objects.Checksum) string {
 	return filepath.Join(buckets.path,
 		fmt.Sprintf("%02x", checksum[0]),
 		fmt.Sprintf("%064x", checksum))
 }
-
 
 func (buckets *Buckets) Get(checksum objects.Checksum) (io.Reader, error) {
 	fp, err := os.Open(buckets.Path(checksum))
@@ -116,12 +112,10 @@ func (buckets *Buckets) GetBlob(checksum objects.Checksum, offset, length uint32
 	return ClosingLimitedReaderFromOffset(fp, int64(offset), int64(length))
 }
 
-
 func (buckets *Buckets) Remove(checksum objects.Checksum) error {
 	return os.Remove(buckets.Path(checksum))
 }
 
-
 func (buckets *Buckets) Put(checksum objects.Checksum, rd io.Reader) error {
-	return WriteToFileAtomicTempDir(buckets.Path(checksum), rd, buckets.path);
+	return WriteToFileAtomicTempDir(buckets.Path(checksum), rd, buckets.path)
 }
