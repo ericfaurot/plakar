@@ -132,7 +132,8 @@ func Salt() (salt []byte, err error) {
 }
 
 // DeriveKey generates a secret from a passphrase using configured KDF parameters
-func DeriveKey(params KDFParams, passphrase []byte) ([]byte, error) {
+func DeriveKey(config *Configuration, passphrase []byte) ([]byte, error) {
+	params := config.KDFParams
 	switch params.KDF {
 	case "ARGON2ID":
 		return argon2.IDKey(passphrase, params.Salt[:], params.Argon2idParams.Time, params.Argon2idParams.Memory, params.Argon2idParams.Threads, params.Argon2idParams.KeyLen), nil

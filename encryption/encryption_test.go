@@ -19,7 +19,7 @@ func TestDeriveKey(t *testing.T) {
 	config.KDFParams.Salt = salt
 
 	passphrase := []byte("strong passphrase")
-	key, err := DeriveKey(config.KDFParams, passphrase)
+	key, err := DeriveKey(config, passphrase)
 	if err != nil {
 		t.Fatalf("Failed to derive key from passphrase: %v", err)
 	}
@@ -40,7 +40,7 @@ func TestEncryptDecryptStream(t *testing.T) {
 	config.KDFParams.Salt = salt
 
 	passphrase := []byte("strong passphrase")
-	key, err := DeriveKey(config.KDFParams, passphrase)
+	key, err := DeriveKey(config, passphrase)
 	if err != nil {
 		t.Fatalf("Failed to derive key from passphrase: %v", err)
 	}
@@ -84,7 +84,7 @@ func TestEncryptDecryptEmptyStream(t *testing.T) {
 	config.KDFParams.Salt = salt
 
 	passphrase := []byte("strong passphrase")
-	key, err := DeriveKey(config.KDFParams, passphrase)
+	key, err := DeriveKey(config, passphrase)
 	if err != nil {
 		t.Fatalf("Failed to derive key from passphrase: %v", err)
 	}
@@ -127,7 +127,7 @@ func TestEncryptDecryptStreamWithIncorrectKey(t *testing.T) {
 	config.KDFParams.Salt = salt
 
 	passphrase := []byte("strong passphrase")
-	key, err := DeriveKey(config.KDFParams, passphrase)
+	key, err := DeriveKey(config, passphrase)
 	if err != nil {
 		t.Fatalf("Failed to derive key from passphrase: %v", err)
 	}
@@ -170,7 +170,7 @@ func TestCompressEncryptThenDecryptDecompressStream(t *testing.T) {
 	config.KDFParams.Salt = salt
 
 	passphrase := []byte("strong passphrase")
-	key, err := DeriveKey(config.KDFParams, passphrase)
+	key, err := DeriveKey(config, passphrase)
 	if err != nil {
 		t.Fatalf("Failed to derive key from passphrase: %v", err)
 	}

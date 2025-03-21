@@ -134,7 +134,7 @@ func (cmd *Create) Execute(ctx *appcontext.AppContext, repo *repository.Reposito
 			return 1, fmt.Errorf("can't encrypt the repository with an empty passphrase")
 		}
 
-		key, err := encryption.DeriveKey(storageConfiguration.Encryption.KDFParams, passphrase)
+		key, err := encryption.DeriveKey(storageConfiguration.Encryption, passphrase)
 		if err != nil {
 			return 1, err
 		}

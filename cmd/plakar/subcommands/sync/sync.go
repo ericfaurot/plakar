@@ -84,7 +84,7 @@ func parse_cmd_sync(ctx *appcontext.AppContext, repo *repository.Repository, arg
 	var peerSecret []byte
 	if peerStoreConfig.Encryption != nil {
 		if pass, ok := storeConfig["passphrase"]; ok {
-			key, err := encryption.DeriveKey(peerStoreConfig.Encryption.KDFParams, []byte(pass))
+			key, err := encryption.DeriveKey(peerStoreConfig.Encryption, []byte(pass))
 			if err != nil {
 				return nil, err
 			}
@@ -100,7 +100,7 @@ func parse_cmd_sync(ctx *appcontext.AppContext, repo *repository.Repository, arg
 					continue
 				}
 
-				key, err := encryption.DeriveKey(peerStoreConfig.Encryption.KDFParams, passphrase)
+				key, err := encryption.DeriveKey(peerStoreConfig.Encryption, passphrase)
 				if err != nil {
 					return nil, err
 				}
